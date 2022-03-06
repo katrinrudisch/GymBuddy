@@ -4,7 +4,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.katrinrudisch.gymbuddy.ui.MainViewModel
-import com.katrinrudisch.gymbuddy.repository.ResponseRepository
+import com.katrinrudisch.gymbuddy.repository.GymBuddyRepository
 import com.katrinrudisch.gymbuddy.service.ApiService
 import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -20,7 +20,7 @@ val viewModelModule = module {
 
 val repositoryModule = module {
     single {
-        ResponseRepository(get())
+        GymBuddyRepository(get())
     }
 }
 

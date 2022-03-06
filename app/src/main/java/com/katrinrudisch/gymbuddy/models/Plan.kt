@@ -1,5 +1,5 @@
 package com.katrinrudisch.gymbuddy.models
 
-data class Response(
-    val data: String
+data class Plan(
+    val title: String
 )
