@@ -1,4 +1,4 @@
-package com.katrinrudisch.gymbuddy.ui
+package com.katrinrudisch.gymbuddy.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.katrinrudisch.gymbuddy.models.NetworkState
@@ -29,7 +30,7 @@ fun <T> StatefulLayout(
 }
 
 @Composable
-fun StateLayout(text: String, icon: ImageVector) {
+private fun StateLayout(text: String, icon: ImageVector) {
     Column {
         Icon(
             imageVector = icon,
@@ -43,5 +44,16 @@ fun StateLayout(text: String, icon: ImageVector) {
                 fontSize = 18.sp
             )
         )
+    }
+}
+
+@Composable
+@Preview
+fun StateLayoutPreview(){
+    Column {
+        val state = NetworkState.Loading<String>()
+        StatefulLayout(state = state) {
+
+        }
     }
 }
