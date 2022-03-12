@@ -14,6 +14,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.katrinrudisch.gymbuddy.compose.GymBuddyTheme
 import com.katrinrudisch.gymbuddy.models.NetworkState
 
 @Composable
@@ -49,11 +50,13 @@ private fun StateLayout(text: String, icon: ImageVector) {
 
 @Composable
 @Preview
-fun StateLayoutPreview(){
-    Column {
-        val state = NetworkState.Loading<String>()
-        StatefulLayout(state = state) {
+fun StateLayoutPreview() {
+    GymBuddyTheme {
+        Column {
+            val state = NetworkState.Loading<String>()
+            StatefulLayout(state = state) {
 
+            }
         }
     }
 }

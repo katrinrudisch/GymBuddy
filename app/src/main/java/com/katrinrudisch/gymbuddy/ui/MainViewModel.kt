@@ -18,11 +18,15 @@ class MainViewModel(private val repo: GymBuddyRepository) : ViewModel() {
         observePlanState()
     }
 
-    internal fun reloadPlans(){
+    internal fun reloadPlans() {
         repo.loadPlans()
     }
 
-    private fun observePlanState(){
+    internal fun addPlan(plan: Plan) {
+        repo.savePlan(plan)
+    }
+
+    private fun observePlanState() {
         repo.planState.onEach {
             planState.value = it
         }.launchIn(viewModelScope)

@@ -1,12 +1,17 @@
 package com.katrinrudisch.gymbuddy.injection
 
+import android.app.Application
+import androidx.room.Room
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.katrinrudisch.gymbuddy.ui.MainViewModel
+import com.katrinrudisch.gymbuddy.repository.GymBuddyDatabase
 import com.katrinrudisch.gymbuddy.repository.GymBuddyRepository
+import com.katrinrudisch.gymbuddy.repository.PlanDao
 import com.katrinrudisch.gymbuddy.service.ApiService
+import com.katrinrudisch.gymbuddy.ui.MainViewModel
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -55,4 +60,20 @@ val retrofitModule = module {
     single { provideGson() }
     single { provideHttpClient() }
     single { provideRetrofit(get(), get()) }
+}
+
+val databaseModule = module {
+    fun provideDatabase(app: Application): GymBuddyDatabase {
+        return Room.databaseBuilder(
+            app,
+            GymBuddyDatabase::class.java, "gymbuddy-db"
+        ).build()
+    }
+
+    fun providePlanDao(database: GymBuddyDatabase): PlanDao {
+        return database.planDao()
+    }
+
+    single { provideDatabase(androidApplication()) }
+    single { providePlanDao(get()) }
 }
