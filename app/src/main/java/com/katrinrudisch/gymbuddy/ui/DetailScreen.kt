@@ -5,6 +5,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import com.katrinrudisch.gymbuddy.compose.GymBuddyTheme
 
 @Composable
 fun DetailScreen(onBackPressed: () -> Unit) {
@@ -13,5 +15,15 @@ fun DetailScreen(onBackPressed: () -> Unit) {
         topBar = { TopAppBar(title = { Text("Plan detail") }) },
     ) {
 
+    }
+}
+
+@Composable
+@Preview
+fun DetailScreenPreview(){
+    GymBuddyTheme {
+        DetailScreen {
+
+        }
     }
 }

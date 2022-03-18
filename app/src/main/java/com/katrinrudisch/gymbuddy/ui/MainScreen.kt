@@ -7,16 +7,19 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.tooling.preview.Preview
+import com.katrinrudisch.gymbuddy.compose.GymBuddyTheme
+import com.katrinrudisch.gymbuddy.models.NetworkState
+import com.katrinrudisch.gymbuddy.models.Plan
 import com.katrinrudisch.gymbuddy.ui.components.Cell
 import com.katrinrudisch.gymbuddy.ui.components.StatefulLayout
 
 @Composable
 fun MainScreen(
-    viewModel: MainViewModel,
+    planState: NetworkState<List<Plan>>,
     onAddActionClicked: () -> Unit,
     onCellClicked: () -> Unit
 ) {
-    val state = viewModel.planState.value
     Scaffold(
         topBar = { TopAppBar(title = { Text("Gym Buddy") }) },
         floatingActionButton = {
@@ -26,7 +29,7 @@ fun MainScreen(
         }
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            StatefulLayout(state) { data ->
+            StatefulLayout(planState) { data ->
                 LazyColumn {
                     data.forEach {
                         item {
@@ -37,5 +40,21 @@ fun MainScreen(
                 }
             }
         }
+    }
+}
+
+@Composable
+@Preview
+fun MainScreenPreview() {
+    val plans = listOf(
+        Plan(title = "Some plan"),
+        Plan(title = "Another plan")
+    )
+    GymBuddyTheme {
+        MainScreen(
+            planState = NetworkState.Success(plans),
+            onAddActionClicked = {},
+            onCellClicked = {}
+        )
     }
 }

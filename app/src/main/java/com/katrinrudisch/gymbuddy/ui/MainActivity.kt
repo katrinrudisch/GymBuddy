@@ -32,14 +32,14 @@ class MainActivity : AppCompatActivity() {
         ) {
             composable(Destination.MAIN.name) {
                 MainScreen(
-                    viewModel = viewModel,
+                    planState = viewModel.planState.value,
                     onAddActionClicked = { navController.navigate(Destination.ADD_PLAN.name) },
                     onCellClicked = { navController.navigate(Destination.DETAIL.name) }
                 )
             }
             composable(Destination.ADD_PLAN.name) {
                 AddPlanScreen(
-                    viewModel = viewModel,
+                    onPlanAdded = { viewModel.addPlan(it) },
                     onBackPressed = { navController.navigateUp() }
                 )
             }
